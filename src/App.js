@@ -30,10 +30,9 @@ class Clock extends React.Component {
 
 	render() {
 		return (
-			<div>
-				<FormatTime date={this.state.date} />
-				<Locale locale={this.state.locale} />
-			</div>
+			<span>
+				<FormatTime date={this.state.date} />&nbsp;<Locale locale={this.state.locale} />
+			</span>
 		);
 	}
 
@@ -44,19 +43,70 @@ class Clock extends React.Component {
 	}
 }
 
+class Field extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {value: props.value}
+	}
+
+	render() {
+        return (
+			<span onClick={() => this.setState({value: (this.state.value + 1) % 3})}>{this.state.value}</span>
+		);
+    }
+}
+
+class Playground extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			x11: 0,
+			x12: 0,
+			x13: 0,
+			x21: 0,
+			x22: 0,
+			x23: 0,
+			x31: 0,
+			x32: 0,
+			x33: 0,
+		}
+	}
+	render() {
+		return (
+			<table>
+				<tbody>
+					<tr>
+						<td><Field value={this.state.x11} /></td>
+						<td><Field value={this.state.x12} /></td>
+						<td><Field value={this.state.x13} /></td>
+					</tr>
+					<tr>
+						<td><Field value={this.state.x21} /></td>
+						<td><Field value={this.state.x22} /></td>
+						<td><Field value={this.state.x23} /></td>
+					</tr>
+					<tr>
+						<td><Field value={this.state.x31} /></td>
+						<td><Field value={this.state.x32} /></td>
+						<td><Field value={this.state.x33} /></td>
+					</tr>
+				</tbody>
+			</table>
+		);
+	}
+}
+
 class App extends Component {
   render() {
     return (
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+          <h2>Welcome to hello-world-react</h2>
         </div>
+        <Playground />
         <p className="App-intro">
-          To get started, edit <code>src/App.js</code>. 🦄
-        </p>
-        <p>
-          <Clock />
+          It's currently <Clock />.
         </p>
       </div>
     );
