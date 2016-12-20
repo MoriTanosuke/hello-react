@@ -2,10 +2,22 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+function FormatTime(props) {
+	return <span className="time">{props.date.toLocaleTimeString()}</span>;
+}
+
+function Locale(props) {
+	var value = props.locale;
+	if(props.locale === 'de') {
+		value = '🇩🇪';
+	}
+	return <span className="locale">{value}</span>;
+}
+
 class Clock extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {date: new Date()};
+		this.state = {date: new Date(), locale: 'de'};
 	}
 
 	componentDidMount() {
@@ -18,7 +30,10 @@ class Clock extends React.Component {
 
 	render() {
 		return (
-			<span>{this.state.date.toLocaleTimeString()}</span>
+			<div>
+				<FormatTime date={this.state.date} />
+				<Locale locale={this.state.locale} />
+			</div>
 		);
 	}
 
@@ -38,7 +53,10 @@ class App extends Component {
           <h2>Welcome to React</h2>
         </div>
         <p className="App-intro">
-          To get started, edit <code>src/App.js</code>. 🦄 It is <Clock /> now.
+          To get started, edit <code>src/App.js</code>. 🦄
+        </p>
+        <p>
+          <Clock />
         </p>
       </div>
     );
