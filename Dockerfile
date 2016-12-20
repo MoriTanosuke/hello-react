@@ -1,4 +1,3 @@
 FROM node:onbuild
-EXPOSE 8080
+EXPOSE 3000
 
-RUN	npm install -g supervisor
