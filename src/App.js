@@ -2,8 +2,31 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-function Time(props) {
-	return <span>{new Date().toLocaleTimeString()}</span>
+class Clock extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {date: new Date()};
+	}
+
+	componentDidMount() {
+		this.timerId = setInterval(() => this.tick(), 1000);
+	}
+
+	componentWillUnmount() {
+		clearInterval(this.timerId);
+	}
+
+	render() {
+		return (
+			<span>{this.state.date.toLocaleTimeString()}</span>
+		);
+	}
+
+	tick() {
+		this.setState({
+			date: new Date()
+		});
+	}
 }
 
 class App extends Component {
@@ -15,7 +38,7 @@ class App extends Component {
           <h2>Welcome to React</h2>
         </div>
         <p className="App-intro">
-          To get started, edit <code>src/App.js</code>. 🦄 It is <Time /> now.
+          To get started, edit <code>src/App.js</code>. 🦄 It is <Clock /> now.
         </p>
       </div>
     );
